@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Your Name] — Design &amp; Technology Portfolio</title>
+<meta name="description" content="Portfolio for MFA Theatre Arts, Design and Technology: place-based experience design, GIS, storytelling, fabrication.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<!-- StoryMapJS (Knight Lab) -->
+<link rel="stylesheet" href="https://cdn.knightlab.com/libs/storymapjs/latest/css/storymap.css">
+<style>
+:root{
+  --sea:#EAF0EE; --ink:#15233A; --tide:#2E6B70; --lamp:#E2A62B; --wash:#C8D8D4; --muted:#4F5F6E;
+  --head:'Bricolage Grotesque',system-ui,sans-serif; --body:'Source Serif 4',Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sea);color:var(--ink);font:18px/1.65 var(--body)}
+a{color:var(--tide)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lamp);outline-offset:3px}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0 0 .5em}
+h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+h3{font-size:1.35rem}
+p{margin:0 0 1em;max-width:68ch}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:20;background:rgba(234,240,238,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--wash)}
+nav .wrap{display:flex;gap:22px;align-items:center;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;font-family:var(--head);font-size:.95rem}
+nav b{margin-right:auto;font-size:1.05rem}
+nav a{text-decoration:none;color:var(--ink)}
+nav a:hover{color:var(--tide)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:110px 0 90px;background:var(--ink);color:var(--sea)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;opacity:.35}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(2.6rem,8vw,6rem);font-weight:700;letter-spacing:-.02em;max-width:14ch;margin-bottom:.35em}
+.hero p{font-size:1.25rem;color:#D3E0DC}
+.pin{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--lamp);margin-right:10px;box-shadow:0 0 0 6px rgba(226,166,43,.25)}
+
+section{padding:84px 0;border-top:1px solid var(--wash)}
+section:first-of-type{border-top:0}
+.lede{font-size:1.3rem;max-width:62ch}
+
+/* case studies */
+.case{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:48px 0;border-top:1px solid var(--wash)}
+.case:first-of-type{border-top:0}
+.case aside{font-family:var(--head);font-size:.95rem;color:var(--muted)}
+.case aside strong{display:block;color:var(--ink);font-size:1.1rem;margin-bottom:.4em}
+.case dl{margin:1em 0 0}
+.case dt{font-weight:700;color:var(--ink);margin-top:.8em}
+.case dd{margin:0}
+.q{font-size:1.2rem;font-style:italic;color:var(--tide)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:24px 0}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;background:var(--wash)}
+figcaption{font-family:var(--head);font-size:.85rem;color:var(--muted);margin-top:6px}
+.ph{display:grid;place-items:center;text-align:center;min-height:180px;padding:16px;background:var(--wash);border:2px dashed var(--tide);color:var(--ink);font-family:var(--head);font-size:.85rem}
+
+#storymap{width:100%;height:620px;border:1px solid var(--wash);margin:24px 0;background:#fff}
+
+/* gallery */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.tabs button{font:inherit;font-family:var(--head);font-size:.95rem;padding:8px 16px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:999px}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--sea)}
+.panel[hidden]{display:none}
+.excerpt{border-left:4px solid var(--lamp);padding-left:20px;font-size:1.1rem}
+
+footer{background:var(--ink);color:var(--sea);padding:64px 0}
+footer a{color:var(--lamp)}
+
+@media(max-width:760px){.case{grid-template-columns:1fr;gap:12px}#storymap{height:520px}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Primary"><div class="wrap">
+  <b>[Your Name]</b>
+  <a href="#about">About</a><a href="#work">Selected work</a><a href="#making">Making</a><a href="#contact">Contact</a>
+</div></nav>
+
+<header class="hero">
+  <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" fill="none" stroke="#E2A62B" stroke-width="1.2">
+    <path d="M-20 420C150 330 260 470 430 400S700 260 880 340s250 90 360 10"/>
+    <path d="M-20 380C150 290 270 430 430 360S710 220 880 300s250 90 360 10" opacity=".8"/>
+    <path d="M-20 340C150 250 280 390 430 320S720 180 880 260s250 90 360 10" opacity=".6"/>
+    <path d="M-20 300C150 210 290 350 430 280S730 140 880 220s250 90 360 10" opacity=".45"/>
+    <path d="M-20 260C150 170 300 310 430 240S740 100 880 180s250 90 360 10" opacity=".3"/>
+    <path d="M-20 460C150 370 250 510 430 440S690 300 880 380s250 90 360 10" opacity=".8"/>
+    <path d="M-20 500C150 410 240 550 430 480S680 340 880 420s250 90 360 10" opacity=".6"/>
+  </svg>
+  <div class="wrap">
+    <p><span class="pin"></span>Portfolio for the MFA in Theatre Arts, Design and Technology</p>
+    <h1>I design experiences by learning how places feel.</h1>
+    <p>Human geographer, program designer and creative placemaker. I turn the textures, sounds and stories of a place into worlds that people can walk through.</p>
+  </div>
+</header>
+
+<main>
+<section id="about"><div class="wrap">
+  <h2>From field scouting to world-building</h2>
+  <p class="lede">Theme-park designers scout a place before they build a world. I have spent years doing the same for real cities, then designing the experience that follows.</p>
+  <p>At the National Defense University I designed and led place-based field practicums across the United States for groups of 100+ participants, managing budgets over $500k. Through Lost Pilgrim, my own practice, I carry that method into community workshops that blend GIS, storytelling, art and making. I am applying to theatre design and technology because I want to bring the same research-driven, sensory approach to the stage, and to add the craft, collaboration and technical depth that theatre teaches.</p>
+  <p>My background in creative writing and languages, my visual art, and my fabrication work (3D modeling, resin printing, welding, animation) all feed one question: how does a designed space change what people feel, remember and do?</p>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <h2>Selected work</h2>
+
+  <article class="case" id="ndu">
+    <aside>
+      <strong>NDU Field Practicums</strong>
+      National Defense University, American Studies program
+      <dl>
+        <dt>Role</dt><dd>Program designer and lead</dd>
+        <dt>Scale</dt><dd>100+ participants, $500k+ budgets</dd>
+        <dt>Places</dt><dd>New Orleans, Brownsville and Arizona, Chicago, Boston, Montana</dd>
+      </dl>
+    </aside>
+    <div>
+      <p class="q">How do you teach a region by letting people meet it?</p>
+      <p><b>Concept.</b> For each region, I immersed myself in its character first, then built a storyline from the people and places that carry it. Each practicum is sequenced like a piece of theatre: contrast, pacing, and moments of quiet between moments of intensity.</p>
+      <p><b>Design.</b> In New Orleans and the Deep South, I connected participants with Mardi Gras Indians and second line culture, Creole and Cajun cuisine at Dooky Chase, hurricane response with the Army Corps of Engineers, a mangrove environmental tour, and Whitney Plantation, to engage respectfully with the legacy of slavery. Explore the other regions on the map below.</p>
+      <div id="storymap" role="region" aria-label="Interactive StoryMap of the field practicums"></div>
+      <p><b>Outcomes.</b> [Add participant feedback, program reuse, or measurable results here.]</p>
+      <div class="figs" data-figs='[["images/ndu-new-orleans.jpg","New Orleans field day"],["images/ndu-itinerary.jpg","Itinerary storyboard"]]'></div>
+    </div>
+  </article>
+
+  <article class="case" id="small-worlds">
+    <aside>
+      <strong>Small Worlds</strong>
+      Lost Pilgrim workshop
+      <dl><dt>Role</dt><dd>Designer and facilitator</dd><dt>Methods</dt><dd>Psychogeography, guided drawing and writing</dd></dl>
+    </aside>
+    <div>
+      <p class="q">What does it take to invent a world you could step into?</p>
+      <p><b>Concept.</b> Participants invent an immersive fictional world through guided art and writing exercises, drawing on geographers, futurists, imagineers and dollhouse builders. The result can be play, self-reflection, or the seed of a creative project.</p>
+      <p><b>Inspiration.</b> The workshop mirrors a field scouting trip at small scale: observing texture, sound, sight, smell and sensation, then translating them into a designed place.</p>
+      <p><b>Outcomes.</b> [Add attendance, participant worlds, and quotes.]</p>
+      <div class="figs" data-figs='[["images/small-worlds-1.jpg","Workshop in progress"],["images/small-worlds-2.jpg","Participant world"],["images/small-worlds-3.jpg","Workshop materials"]]'></div>
+    </div>
+  </article>
+
+  <article class="case" id="memory-maps">
+    <aside>
+      <strong>Memory Maps and Microseasons</strong>
+      Lost Pilgrim community projects, San Diego
+      <dl><dt>Role</dt><dd>Concept, design, fabrication, facilitation</dd><dt>Methods</dt><dd>Field journaling, participatory mapping, large-scale physical map</dd></dl>
+    </aside>
+    <div>
+      <p class="q">What does a neighborhood remember, and how does a year really change?</p>
+      <p><b>Memory Maps.</b> My original idea of memory topography: residents map their memories onto local places, revealing shared stories, beloved landmarks and the overlooked character of a neighborhood. I built a very large interactive map that residents could add to by hand.</p>
+      <p><b>Microseasons.</b> Inspired by traditional Chinese microseasons, the community collectively made a San Diego calendar of subtle seasonal changes through observation and field journaling.</p>
+      <p><b>Outcomes.</b> [Add numbers, community response, and where the map and calendar live now.]</p>
+      <div class="figs" data-figs='[["images/memory-map-large.jpg","The large interactive map"],["images/memory-map-detail.jpg","Resident contributions, detail"],["images/microseasons-calendar.jpg","San Diego microseasons calendar"]]'></div>
+    </div>
+  </article>
+
+  <article class="case" id="office-future">
+    <aside>
+      <strong>Office of the Future</strong>
+      Response to an RFP, downtown San Diego
+      <dl><dt>Role</dt><dd>Concept and spatial design</dd><dt>Format</dt><dd>Experiential workplace proposal</dd></dl>
+    </aside>
+    <div>
+      <p class="q">What if an office were an experience, not just a floor plan?</p>
+      <p><b>Concept.</b> [Describe your central idea in two or three sentences: what the space feels like, and who it serves.]</p>
+      <p><b>Design.</b> [Walk through the visitor journey, spatial zones, materials, light and sound. Add a floor plan or diagram.]</p>
+      <p><b>Outcome.</b> [Describe the RFP result and what you learned.]</p>
+      <div class="figs" data-figs='[["images/office-plan.jpg","Spatial plan"],["images/office-journey.jpg","User journey"],["images/office-render.jpg","Concept rendering"]]'></div>
+    </div>
+  </article>
+
+  <article class="case" id="fabrication">
+    <aside>
+      <strong>3D Modeling and Fabrication</strong>
+      Blender, Nomad, resin printing
+      <dl><dt>Highlight</dt><dd>Winning game jam team, 3D game assets</dd></dl>
+    </aside>
+    <div>
+      <p class="q">How do digital forms become physical objects?</p>
+      <p>I taught myself Blender and Nomad, and I print my models in resin. For the game jam my team won, I built 3D assets for a playable world.</p>
+      <div class="figs" data-figs='[["images/blender-render.jpg","Blender render"],["images/resin-print.jpg","Resin print"],["images/gamejam-assets.jpg","Game jam assets"]]'></div>
+    </div>
+  </article>
+</div></section>
+
+<section id="making"><div class="wrap">
+  <h2>Making and exploration</h2>
+  <p class="lede">Smaller studies, experiments and craft that show how I think with my hands.</p>
+  <div class="tabs" role="group" aria-label="Filter gallery">
+    <button aria-pressed="true" data-t="char">Characters and story</button>
+    <button aria-pressed="false" data-t="anim">Animation</button>
+    <button aria-pressed="false" data-t="craft">Craft and engineering</button>
+    <button aria-pressed="false" data-t="light">Light and concept</button>
+    <button aria-pressed="false" data-t="write">Writing</button>
+  </div>
+
+  <div class="panel" id="char">
+    <p>Moodboards, drafts and character exploration from a class with Jackie Droujko, plus comics and storyboards for my long-term project, code name Undersea.</p>
+    <div class="figs" data-figs='[["images/char-moodboard.jpg","Moodboard"],["images/char-draft.jpg","Character draft"],["images/undersea-board.jpg","Undersea storyboard"],["images/undersea-comic.jpg","Undersea comic page"]]'></div>
+  </div>
+  <div class="panel" id="anim" hidden>
+    <p>Playful studies in motion: dot animation, cat and fish, windchimes, and pixel art (Sky Factory, hot air balloon).</p>
+    <div class="figs" data-figs='[["images/dot-animation.gif","Dot animation"],["images/cat-and-fish.gif","Cat and fish"],["images/windchime.gif","Windchime"],["images/sky-factory.gif","Sky Factory, pixel art"],["images/hot-air-balloon.gif","Hot air balloon, pixel art"]]'></div>
+  </div>
+  <div class="panel" id="craft" hidden>
+    <p>Papier-mâché masks, recent MIG welding, articulated wings modeled on motiongen.io, a tessellated tile design, and handmade baby mobiles and stockings.</p>
+    <div class="figs" data-figs='[["images/masks.jpg","Papier-mâché masks"],["images/welding.jpg","MIG welding"],["images/wings.jpg","Articulated wings"],["images/tessellation.jpg","Tessellated tiles"],["images/mobile.jpg","Baby mobile"]]'></div>
+  </div>
+  <div class="panel" id="light" hidden>
+    <p>Projector-based lighting tests, and experimental art exploring Jungian concepts.</p>
+    <div class="figs" data-figs='[["images/projector-1.jpg","Projector lighting study"],["images/projector-2.jpg","Projector lighting study"],["images/jung-1.jpg","Jungian exploration"],["images/jung-2.jpg","Jungian exploration"]]'></div>
+  </div>
+  <div class="panel" id="write" hidden>
+    <p>My BA focused on creative writing and languages. An excerpt of fiction and a poem:</p>
+    <blockquote class="excerpt">[Paste a short page of your prose here.]</blockquote>
+    <blockquote class="excerpt">[Paste a poem here, or link to a PDF.]</blockquote>
+  </div>
+</div></section>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <p>[Your Name] · San Diego, California</p>
+  <p><a href="mailto:you@example.com">you@example.com</a> · <a href="#">Lost Pilgrim</a> · <a href="#">CV (PDF)</a> · <a href="#">LinkedIn</a></p>
+</div></footer>
+
+<script src="https://cdn.knightlab.com/libs/storymapjs/latest/js/storymap-min.js"></script>
+<script>
+/* ---------- Images: drop files into /images; missing ones show a labeled placeholder ---------- */
+document.querySelectorAll('[data-figs]').forEach(function(box){
+  JSON.parse(box.dataset.figs).forEach(function(f){
+    var fig=document.createElement('figure'), img=new Image();
+    img.src=f[0]; img.alt=f[1]; img.loading='lazy';
+    img.onerror=function(){var d=document.createElement('div');d.className='ph';d.textContent='Add '+f[0];img.replaceWith(d)};
+    var c=document.createElement('figcaption'); c.textContent=f[1];
+    fig.append(img,c); box.append(fig);
+  });
+});
+
+/* ---------- Gallery tabs ---------- */
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    document.querySelectorAll('.panel').forEach(function(p){p.hidden=(p.id!==b.dataset.t)});
+  });
+});
+
+/* ---------- StoryMapJS: edit text, coordinates and media here ---------- */
+var storymap_data={storymap:{
+  language:'en', map_type:'osm:standard', map_as_image:false,
+  slides:[
+    {type:'overview', text:{headline:'NDU Field Practicums', text:'<p>Place-based field experiences designed and led across the United States. Click the arrows to travel.</p>'}, location:{lat:39.5,lon:-96,zoom:4}},
+    {location:{lat:29.9511,lon:-90.0715,zoom:7,line:true}, text:{headline:'New Orleans and the Deep South', text:'<p>Mardi Gras Indians and second line culture. Creole and Cajun cuisine at Dooky Chase. Hurricane response with the Army Corps of Engineers. Mangrove tours. Whitney Plantation.</p>'}, media:{url:'', caption:'Add a photo URL here (e.g. images/ndu-new-orleans.jpg)'}},
+    {location:{lat:25.9017,lon:-97.4975,zoom:7,line:true}, text:{headline:'Brownsville, Texas and El Norte', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
+    {location:{lat:32.2226,lon:-110.9747,zoom:7,line:true}, text:{headline:'Arizona and El Norte', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
+    {location:{lat:41.8781,lon:-87.6298,zoom:7,line:true}, text:{headline:'Chicago and the Rustbelt', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
+    {location:{lat:42.3601,lon:-71.0589,zoom:7,line:true}, text:{headline:'Boston and Yankeedom', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
+    {location:{lat:46.5891,lon:-112.0391,zoom:6,line:true}, text:{headline:'Montana and the Far West', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}}
+  ]}};
+new KLStoryMap.StoryMap('storymap', storymap_data, {font:'default'});
+</script>
+</body>
+</html>
