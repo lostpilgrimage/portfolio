@@ -44,8 +44,15 @@ section:first-of-type{border-top:0}
 .lede{font-size:1.3rem;max-width:62ch}
 
 /* case studies */
-.case{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:48px 0;border-top:1px solid var(--wash)}
-.case:first-of-type{border-top:0}
+.case{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:40px 0 0}
+.case[hidden]{display:none}
+.picker{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:24px 0 8px}
+.picker button{font:inherit;text-align:left;padding:16px 18px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:6px;display:flex;flex-direction:column;gap:4px}
+.picker button b{font-family:var(--head);font-size:1.1rem;line-height:1.2}
+.picker button span{font-size:.9rem;line-height:1.35;color:var(--muted)}
+.picker button:hover{border-color:var(--tide)}
+.picker button[aria-expanded=true]{background:var(--ink);color:var(--sea);border-color:var(--ink)}
+.picker button[aria-expanded=true] span{color:var(--wash)}
 .case aside{font-family:var(--head);font-size:.95rem;color:var(--muted)}
 .case aside strong{display:block;color:var(--ink);font-size:1.1rem;margin-bottom:.4em}
 .case dl{margin:1em 0 0}
@@ -64,7 +71,21 @@ figcaption{font-family:var(--head);font-size:.85rem;color:var(--muted);margin-to
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
 .tabs button{font:inherit;font-family:var(--head);font-size:.95rem;padding:8px 16px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:999px}
 .tabs button[aria-pressed=true]{background:var(--ink);color:var(--sea)}
-.panel[hidden]{display:none}
+.cat{padding-top:24px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:14px}
+.thumbs>button{font:inherit;text-align:left;padding:0;border:3px solid transparent;background:none;color:var(--ink);cursor:pointer;border-radius:4px}
+.thumbs>button:hover{border-color:var(--tide)}
+.thumbs>button[aria-expanded=true]{border-color:var(--ink);background:var(--ink);color:var(--sea)}
+.thumbs>button img,.thumbs>button .ph{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;min-height:0;border:0}
+.thumbs>button span{display:block;padding:8px 6px;font-family:var(--head);font-size:.88rem;line-height:1.25}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px;background:#fff;border:2px solid var(--ink);padding:24px;margin-top:16px}
+.detail[hidden]{display:none}
+.detail img{display:block;max-width:100%;height:auto}
+.detail h3{margin:0 0 .5em}
+.detail .excerpt{margin:0}
+@media(max-width:900px){.picker{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.detail{grid-template-columns:1fr}}
 .excerpt{border-left:4px solid var(--lamp);padding-left:20px;font-size:1.1rem}
 
 footer{background:var(--ink);color:var(--sea);padding:64px 0}
@@ -107,8 +128,16 @@ footer a{color:var(--lamp)}
 
 <section id="work"><div class="wrap">
   <h2>Selected work</h2>
+  <p>Select a project to read the full story.</p>
+  <div class="picker" role="group" aria-label="Choose a project">
+    <button aria-expanded="false" aria-controls="ndu" data-p="ndu"><b>NDU Field Practicums</b><span>Place-based programs across the U.S.</span></button>
+    <button aria-expanded="false" aria-controls="small-worlds" data-p="small-worlds"><b>Small Worlds</b><span>A world-building workshop</span></button>
+    <button aria-expanded="false" aria-controls="memory-maps" data-p="memory-maps"><b>Memory Maps</b><span>Mapping a neighborhood's memory</span></button>
+    <button aria-expanded="false" aria-controls="microseasons" data-p="microseasons"><b>Microseasons</b><span>A seasonal calendar for San Diego</span></button>
+    <button aria-expanded="false" aria-controls="office-future" data-p="office-future"><b>Office of the Future</b><span>An experiential workplace proposal</span></button>
+  </div>
 
-  <article class="case" id="ndu">
+  <article class="case" id="ndu" hidden>
     <aside>
       <strong>NDU Field Practicums</strong>
       National Defense University, American Studies program
@@ -128,7 +157,7 @@ footer a{color:var(--lamp)}
     </div>
   </article>
 
-  <article class="case" id="small-worlds">
+  <article class="case" id="small-worlds" hidden>
     <aside>
       <strong>Small Worlds</strong>
       Lost Pilgrim workshop
@@ -143,22 +172,37 @@ footer a{color:var(--lamp)}
     </div>
   </article>
 
-  <article class="case" id="memory-maps">
+  <article class="case" id="memory-maps" hidden>
     <aside>
-      <strong>Memory Maps and Microseasons</strong>
-      Lost Pilgrim community projects, San Diego
-      <dl><dt>Role</dt><dd>Concept, design, fabrication, facilitation</dd><dt>Methods</dt><dd>Field journaling, participatory mapping, large-scale physical map</dd></dl>
+      <strong>Memory Maps</strong>
+      Lost Pilgrim community project, San Diego
+      <dl><dt>Role</dt><dd>Concept, design, fabrication, facilitation</dd><dt>Methods</dt><dd>Participatory mapping, large-scale physical map</dd></dl>
     </aside>
     <div>
-      <p class="q">What does a neighborhood remember, and how does a year really change?</p>
-      <p><b>Memory Maps.</b> My original idea of memory topography: residents map their memories onto local places, revealing shared stories, beloved landmarks and the overlooked character of a neighborhood. I built a very large interactive map that residents could add to by hand.</p>
-      <p><b>Microseasons.</b> Inspired by traditional Chinese microseasons, the community collectively made a San Diego calendar of subtle seasonal changes through observation and field journaling.</p>
-      <p><b>Outcomes.</b> [Add numbers, community response, and where the map and calendar live now.]</p>
-      <div class="figs" data-figs='[["images/memory-map-large.jpg","The large interactive map"],["images/memory-map-detail.jpg","Resident contributions, detail"],["images/microseasons-calendar.jpg","San Diego microseasons calendar"]]'></div>
+      <p class="q">What does a neighborhood remember?</p>
+      <p><b>Concept.</b> My original idea of memory topography: residents map their memories onto local places, revealing shared stories, beloved landmarks and the overlooked character of a neighborhood.</p>
+      <p><b>Design.</b> I built a very large interactive map that residents could add to by hand. [Describe materials, scale, and how people interacted with it.]</p>
+      <p><b>Outcomes.</b> [Add numbers, community response, and where the map lives now.]</p>
+      <div class="figs" data-figs='[["images/memory-map-large.jpg","The large interactive map"],["images/memory-map-detail.jpg","Resident contributions, detail"]]'></div>
     </div>
   </article>
 
-  <article class="case" id="office-future">
+  <article class="case" id="microseasons" hidden>
+    <aside>
+      <strong>Microseasons</strong>
+      Lost Pilgrim community project, San Diego
+      <dl><dt>Role</dt><dd>Concept, design, facilitation</dd><dt>Methods</dt><dd>Community observation, field journaling</dd></dl>
+    </aside>
+    <div>
+      <p class="q">How does a year really change where you live?</p>
+      <p><b>Concept.</b> Inspired by traditional Chinese microseasons, the community collectively created a calendar of the subtle seasonal changes of San Diego.</p>
+      <p><b>Design.</b> [Describe the observation prompts, the journaling format, and how observations became the calendar.]</p>
+      <p><b>Outcomes.</b> [Add participation, the finished calendar, and community response.]</p>
+      <div class="figs" data-figs='[["images/microseasons-calendar.jpg","San Diego microseasons calendar"],["images/microseasons-journal.jpg","Field journal pages"]]'></div>
+    </div>
+  </article>
+
+  <article class="case" id="office-future" hidden>
     <aside>
       <strong>Office of the Future</strong>
       Response to an RFP, downtown San Diego
@@ -173,51 +217,33 @@ footer a{color:var(--lamp)}
     </div>
   </article>
 
-  <article class="case" id="fabrication">
-    <aside>
-      <strong>3D Modeling and Fabrication</strong>
-      Blender, Nomad, resin printing
-      <dl><dt>Highlight</dt><dd>Winning game jam team, 3D game assets</dd></dl>
-    </aside>
-    <div>
-      <p class="q">How do digital forms become physical objects?</p>
-      <p>I taught myself Blender and Nomad, and I print my models in resin. For the game jam my team won, I built 3D assets for a playable world.</p>
-      <div class="figs" data-figs='[["images/blender-render.jpg","Blender render"],["images/resin-print.jpg","Resin print"],["images/gamejam-assets.jpg","Game jam assets"]]'></div>
-    </div>
-  </article>
 </div></section>
 
 <section id="making"><div class="wrap">
   <h2>Making and exploration</h2>
-  <p class="lede">Smaller studies, experiments and craft that show how I think with my hands.</p>
-  <div class="tabs" role="group" aria-label="Filter gallery">
-    <button aria-pressed="true" data-t="char">Characters and story</button>
-    <button aria-pressed="false" data-t="anim">Animation</button>
-    <button aria-pressed="false" data-t="craft">Craft and engineering</button>
-    <button aria-pressed="false" data-t="light">Light and concept</button>
-    <button aria-pressed="false" data-t="write">Writing</button>
+  <p class="lede">Smaller studies, experiments and craft that show how I think with my hands. Select a category, then any piece, to read about its concept and process.</p>
+  <div class="picker" role="group" aria-label="Choose a category">
+    <button aria-expanded="false" aria-controls="cat-char" data-p="cat-char"><b>Characters and story</b><span>Character design, comics, Undersea</span></button>
+    <button aria-expanded="false" aria-controls="cat-anim" data-p="cat-anim"><b>Animation</b><span>Dot, pixel and looping studies</span></button>
+    <button aria-expanded="false" aria-controls="cat-craft" data-p="cat-craft"><b>Craft and engineering</b><span>3D, masks, welding, light, Jungian art</span></button>
+    <button aria-expanded="false" aria-controls="cat-write" data-p="cat-write"><b>Writing</b><span>Prose and poems</span></button>
   </div>
 
-  <div class="panel" id="char">
+  <div class="cat" id="cat-char" hidden>
     <p>Moodboards, drafts and character exploration from a class with Jackie Droujko, plus comics and storyboards for my long-term project, code name Undersea.</p>
-    <div class="figs" data-figs='[["images/char-moodboard.jpg","Moodboard"],["images/char-draft.jpg","Character draft"],["images/undersea-board.jpg","Undersea storyboard"],["images/undersea-comic.jpg","Undersea comic page"]]'></div>
+    <div class="items" data-cat="char"></div>
   </div>
-  <div class="panel" id="anim" hidden>
+  <div class="cat" id="cat-anim" hidden>
     <p>Playful studies in motion: dot animation, cat and fish, windchimes, and pixel art (Sky Factory, hot air balloon).</p>
-    <div class="figs" data-figs='[["images/dot-animation.gif","Dot animation"],["images/cat-and-fish.gif","Cat and fish"],["images/windchime.gif","Windchime"],["images/sky-factory.gif","Sky Factory, pixel art"],["images/hot-air-balloon.gif","Hot air balloon, pixel art"]]'></div>
+    <div class="items" data-cat="anim"></div>
   </div>
-  <div class="panel" id="craft" hidden>
-    <p>Papier-mâché masks, recent MIG welding, articulated wings modeled on motiongen.io, a tessellated tile design, and handmade baby mobiles and stockings.</p>
-    <div class="figs" data-figs='[["images/masks.jpg","Papier-mâché masks"],["images/welding.jpg","MIG welding"],["images/wings.jpg","Articulated wings"],["images/tessellation.jpg","Tessellated tiles"],["images/mobile.jpg","Baby mobile"]]'></div>
+  <div class="cat" id="cat-craft" hidden>
+    <p>3D modeling in Blender and Nomad with resin printing, 3D assets from a game jam my team won, papier-mâché masks, recent MIG welding, articulated wings modeled on motiongen.io, a tessellated tile design, handmade baby mobiles and stockings, projector-based lighting tests, and experimental art exploring Jungian concepts.</p>
+    <div class="items" data-cat="craft"></div>
   </div>
-  <div class="panel" id="light" hidden>
-    <p>Projector-based lighting tests, and experimental art exploring Jungian concepts.</p>
-    <div class="figs" data-figs='[["images/projector-1.jpg","Projector lighting study"],["images/projector-2.jpg","Projector lighting study"],["images/jung-1.jpg","Jungian exploration"],["images/jung-2.jpg","Jungian exploration"]]'></div>
-  </div>
-  <div class="panel" id="write" hidden>
-    <p>My BA focused on creative writing and languages. An excerpt of fiction and a poem:</p>
-    <blockquote class="excerpt">[Paste a short page of your prose here.]</blockquote>
-    <blockquote class="excerpt">[Paste a poem here, or link to a PDF.]</blockquote>
+  <div class="cat" id="cat-write" hidden>
+    <p>My BA focused on creative writing and languages. An excerpt of fiction and a poem.</p>
+    <div class="items" data-cat="write"></div>
   </div>
 </div></section>
 </main>
@@ -241,11 +267,47 @@ document.querySelectorAll('[data-figs]').forEach(function(box){
   });
 });
 
-/* ---------- Gallery tabs ---------- */
-document.querySelectorAll('.tabs button').forEach(function(b){
-  b.addEventListener('click',function(){
-    document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
-    document.querySelectorAll('.panel').forEach(function(p){p.hidden=(p.id!==b.dataset.t)});
+/* ---------- Making and exploration: edit titles, images, concept and process here ---------- */
+var C='[Explain the idea or question behind this piece.]', P='[Describe your tools, steps, iterations and what you learned.]';
+function I(img,title,extra){return Object.assign({img:img,title:title,c:C,p:P},extra||{});}
+var studies={
+  char:[I('images/char-moodboard.jpg','Moodboard'),I('images/char-draft.jpg','Character draft'),I('images/undersea-board.jpg','Undersea storyboard'),I('images/undersea-comic.jpg','Undersea comic page')],
+  anim:[I('images/dot-animation.gif','Dot animation'),I('images/cat-and-fish.gif','Cat and fish'),I('images/windchime.gif','Windchime'),I('images/sky-factory.gif','Sky Factory, pixel art'),I('images/hot-air-balloon.gif','Hot air balloon, pixel art')],
+  craft:[I('images/blender-render.jpg','Blender render'),I('images/resin-print.jpg','Resin print'),I('images/gamejam-assets.jpg','Game jam assets, winning team'),I('images/masks.jpg','Papier-mâché masks'),I('images/welding.jpg','MIG welding'),I('images/wings.jpg','Articulated wings'),I('images/tessellation.jpg','Tessellated tiles'),I('images/mobile.jpg','Baby mobile'),I('images/stockings.jpg','Handmade stockings'),I('images/projector-1.jpg','Projector lighting study 1'),I('images/projector-2.jpg','Projector lighting study 2'),I('images/jung-1.jpg','Jungian exploration 1'),I('images/jung-2.jpg','Jungian exploration 2')],
+  write:[I('','Prose excerpt',{text:'[Paste a short page of your fiction here.]'}),I('','Poem',{text:'[Paste a poem here, or link to a PDF.]'})]
+};
+function picture(it){
+  if(!it.img){var d=document.createElement('div');d.className='ph';d.textContent='Text';return d;}
+  var img=new Image(); img.src=it.img; img.alt=it.title; img.loading='lazy';
+  img.onerror=function(){var d=document.createElement('div');d.className='ph';d.textContent='Add '+it.img;img.replaceWith(d)};
+  return img;
+}
+Object.keys(studies).forEach(function(k){
+  var box=document.querySelector('.items[data-cat="'+k+'"]'),
+      grid=document.createElement('div'), detail=document.createElement('div');
+  grid.className='thumbs'; detail.className='detail'; detail.hidden=true; detail.setAttribute('aria-live','polite');
+  box.append(grid,detail);
+  studies[k].forEach(function(it){
+    var b=document.createElement('button'), lab=document.createElement('span');
+    b.type='button'; b.setAttribute('aria-expanded','false'); lab.textContent=it.title;
+    b.append(picture(it),lab); grid.append(b);
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')==='true';
+      grid.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-expanded','false')});
+      detail.replaceChildren();
+      if(open){detail.hidden=true;return;}
+      b.setAttribute('aria-expanded','true');
+      var left=document.createElement('div'), right=document.createElement('div');
+      if(it.text){var q=document.createElement('blockquote');q.className='excerpt';q.textContent=it.text;left.append(q);}
+      else left.append(picture(it));
+      var h=document.createElement('h3');h.textContent=it.title;right.append(h);
+      [['Concept. ',it.c],['Process. ',it.p]].forEach(function(r){
+        var p=document.createElement('p'),bold=document.createElement('b');
+        bold.textContent=r[0]; p.append(bold,r[1]); right.append(p);
+      });
+      detail.append(left,right); detail.hidden=false;
+      detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
   });
 });
 
@@ -254,14 +316,43 @@ var storymap_data={storymap:{
   language:'en', map_type:'osm:standard', map_as_image:false,
   slides:[
     {type:'overview', text:{headline:'NDU Field Practicums', text:'<p>Place-based field experiences designed and led across the United States. Click the arrows to travel.</p>'}, location:{lat:39.5,lon:-96,zoom:4}},
-    {location:{lat:29.9511,lon:-90.0715,zoom:7,line:true}, text:{headline:'New Orleans and the Deep South', text:'<p>Mardi Gras Indians and second line culture. Creole and Cajun cuisine at Dooky Chase. Hurricane response with the Army Corps of Engineers. Mangrove tours. Whitney Plantation.</p>'}, media:{url:'', caption:'Add a photo URL here (e.g. images/ndu-new-orleans.jpg)'}},
+    {location:{lat:29.9511,lon:-90.0715,zoom:7,line:true}, text:{headline:'New Orleans and the Deep South', text:'<p>Mardi Gras Indians and second line culture. Creole and Cajun cuisine at Dooky Chase. Hurricane response with the Army Corps of Engineers. Mangrove tours. Whitney Plantation.</p>'}},
     {location:{lat:25.9017,lon:-97.4975,zoom:7,line:true}, text:{headline:'Brownsville, Texas and El Norte', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
     {location:{lat:32.2226,lon:-110.9747,zoom:7,line:true}, text:{headline:'Arizona and El Norte', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
     {location:{lat:41.8781,lon:-87.6298,zoom:7,line:true}, text:{headline:'Chicago and the Rustbelt', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
     {location:{lat:42.3601,lon:-71.0589,zoom:7,line:true}, text:{headline:'Boston and Yankeedom', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}},
     {location:{lat:46.5891,lon:-112.0391,zoom:6,line:true}, text:{headline:'Montana and the Far West', text:'<p>[Add the story, stakeholders and sensory notes.]</p>'}}
   ]}};
-new KLStoryMap.StoryMap('storymap', storymap_data, {font:'default'});
+var mapStarted=false;
+function startMap(){
+  if(mapStarted) return; mapStarted=true;
+  var box=document.getElementById('storymap');
+  requestAnimationFrame(function(){ /* wait one frame so the container has a real size */
+    try{
+      if(typeof KLStoryMap==='undefined') throw new Error('StoryMapJS did not load');
+      new KLStoryMap.StoryMap('storymap', storymap_data, {font:'default'});
+    }catch(e){
+      box.innerHTML='<p style="padding:24px">The interactive map could not load. Check your internet connection and reload the page. ('+e.message+')</p>';
+    }
+  });
+}
+
+/* ---------- Selected work: buttons open and close project descriptions ---------- */
+document.querySelectorAll('.picker button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var group=b.closest('.picker'), open=b.getAttribute('aria-expanded')==='true';
+    group.querySelectorAll('button').forEach(function(x){
+      x.setAttribute('aria-expanded','false');
+      document.getElementById(x.dataset.p).hidden=true;
+    });
+    if(!open){
+      b.setAttribute('aria-expanded','true');
+      var a=document.getElementById(b.dataset.p); a.hidden=false;
+      if(b.dataset.p==='ndu') startMap(); /* map must be visible before it loads */
+      a.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+  });
+});
 </script>
 </body>
 </html>
